@@ -30,4 +30,16 @@ public class TripService {
         Optional<Trip> trip = tripRepo.findById(id);
         return trip.orElseThrow(TripNotFoundException::new);
     }
+
+    public Trip confirmTrip(UUID id) {
+        Optional<Trip> trip = tripRepo.findById(id);
+
+        if (trip.isEmpty()) {
+            throw new TripNotFoundException();
+        }
+
+        Trip rawTrip = trip.get();
+        rawTrip.setIsConfirmed(true);
+        return tripRepo.save(rawTrip);
+    }
 }
