@@ -35,4 +35,10 @@ public class TripResource {
         Trip trip = tripServ.findTripById(id);
         return ResponseEntity.ok().body(trip);
     }
+
+    @GetMapping(value = "/{id}/confirm")
+    public ResponseEntity<Trip> handleConfirmTrip(@PathVariable UUID id){
+        Trip trip = tripServ.confirmTrip(id);
+        return ResponseEntity.ok().body(trip);
+    }
 }
