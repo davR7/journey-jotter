@@ -2,6 +2,7 @@ package com.davr7.journey_jotter.resources;
 
 import com.davr7.journey_jotter.domain.Trip;
 import com.davr7.journey_jotter.dtos.TripDtoRequest;
+import com.davr7.journey_jotter.services.ParticipantService;
 import com.davr7.journey_jotter.services.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,13 @@ public class TripResource {
     @Autowired
     TripService tripServ;
 
+    @Autowired
+    ParticipantService participantServ;
+
     @PostMapping
     public ResponseEntity<Trip> handleCreateTrip(@RequestBody TripDtoRequest data){
         Trip newTrip = tripServ.createTrip(data);
+        participantServ.registerParticipantsToEvent(data.emailsToInvite(), newTrip);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
