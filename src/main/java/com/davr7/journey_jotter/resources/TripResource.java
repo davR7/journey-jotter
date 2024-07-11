@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "trip")
@@ -27,5 +28,11 @@ public class TripResource {
                 .toUri();
 
         return ResponseEntity.created(location).body(newTrip);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Trip> handleFindTripById(@PathVariable UUID id){
+        Trip trip = tripServ.findTripById(id);
+        return ResponseEntity.ok().body(trip);
     }
 }
