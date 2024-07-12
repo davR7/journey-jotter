@@ -2,6 +2,7 @@ package com.davr7.journey_jotter.services;
 
 import com.davr7.journey_jotter.domain.Participant;
 import com.davr7.journey_jotter.domain.Trip;
+import com.davr7.journey_jotter.dtos.ParticipantConfirmDto;
 import com.davr7.journey_jotter.repositories.ParticipantRepository;
 import com.davr7.journey_jotter.services.exceptions.ParticipantNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class ParticipantService {
     @Autowired
     ParticipantRepository participantRepo;
 
-    public Participant confirmParticipant(UUID id) {
+    public Participant confirmParticipant(UUID id, ParticipantConfirmDto data) {
         Optional<Participant> participant = participantRepo.findById(id);
 
         if (participant.isEmpty()) {
@@ -24,6 +25,7 @@ public class ParticipantService {
         }
 
         Participant rawParticipant = participant.get();
+        rawParticipant.setName(data.name());
         rawParticipant.setIsConfirmed(true);
         return participantRepo.save(rawParticipant);
     }
