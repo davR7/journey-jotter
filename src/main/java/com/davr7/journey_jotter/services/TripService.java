@@ -2,7 +2,7 @@ package com.davr7.journey_jotter.services;
 
 import com.davr7.journey_jotter.common.DateUtils;
 import com.davr7.journey_jotter.domain.Trip;
-import com.davr7.journey_jotter.dtos.TripDtoRequest;
+import com.davr7.journey_jotter.dtos.TripCreateDto;
 import com.davr7.journey_jotter.repositories.TripRepository;
 import com.davr7.journey_jotter.services.exceptions.TripNotFoundException;
 import org.springframework.beans.BeanUtils;
@@ -17,7 +17,7 @@ public class TripService {
     @Autowired
     TripRepository tripRepo;
 
-    public Trip createTrip(TripDtoRequest data) {
+    public Trip createTrip(TripCreateDto data) {
         Trip newTrip = new Trip();
         BeanUtils.copyProperties(data, newTrip, "startsAt", "endsAt", "emailsToInvite");
         newTrip.setIsConfirmed(false);

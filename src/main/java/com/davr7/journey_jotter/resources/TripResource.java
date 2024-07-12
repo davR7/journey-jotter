@@ -2,7 +2,7 @@ package com.davr7.journey_jotter.resources;
 
 import com.davr7.journey_jotter.domain.Trip;
 import com.davr7.journey_jotter.dtos.ParticipantEventDto;
-import com.davr7.journey_jotter.dtos.TripDtoRequest;
+import com.davr7.journey_jotter.dtos.TripCreateDto;
 import com.davr7.journey_jotter.services.ParticipantService;
 import com.davr7.journey_jotter.services.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class TripResource {
     ParticipantService participantServ;
 
     @PostMapping
-    public ResponseEntity<Trip> handleCreateTrip(@RequestBody TripDtoRequest data){
+    public ResponseEntity<Trip> handleCreateTrip(@RequestBody TripCreateDto data){
         Trip newTrip = tripServ.createTrip(data);
         participantServ.registerParticipantsToEvent(data.emailsToInvite(), newTrip);
 
