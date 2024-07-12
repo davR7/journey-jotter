@@ -1,8 +1,11 @@
 package com.davr7.journey_jotter.resources;
 
+import com.davr7.journey_jotter.domain.Activity;
 import com.davr7.journey_jotter.domain.Trip;
+import com.davr7.journey_jotter.dtos.ActivityCreateDto;
 import com.davr7.journey_jotter.dtos.ParticipantEventDto;
 import com.davr7.journey_jotter.dtos.TripCreateDto;
+import com.davr7.journey_jotter.services.ActivityService;
 import com.davr7.journey_jotter.services.ParticipantService;
 import com.davr7.journey_jotter.services.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,9 @@ public class TripResource {
 
     @Autowired
     ParticipantService participantServ;
+
+    @Autowired
+    ActivityService activityServ;
 
     @PostMapping
     public ResponseEntity<Trip> handleCreateTrip(@RequestBody TripCreateDto data){
@@ -53,5 +59,11 @@ public class TripResource {
     public ResponseEntity<List<ParticipantEventDto>> handleFindAllParticipantsFromEvent(@PathVariable UUID id){
         List<ParticipantEventDto> participants =  participantServ.findAllParticipantsFromEvent(id);
         return ResponseEntity.ok().body(participants);
+    }
+
+    @PostMapping(value = "/{id}/activity")
+    public ResponseEntity<Activity> handleCreateActivityToEvent(@PathVariable UUID id, @RequestBody ActivityCreateDto data){
+        Activity activity = activityServ.createActivityToEvent(id, data);
+        return ResponseEntity.ok().body(activity);
     }
 }
