@@ -3,6 +3,7 @@ package com.davr7.journey_jotter.services;
 import com.davr7.journey_jotter.domain.Participant;
 import com.davr7.journey_jotter.domain.Trip;
 import com.davr7.journey_jotter.dtos.ParticipantConfirmDto;
+import com.davr7.journey_jotter.dtos.ParticipantEventDto;
 import com.davr7.journey_jotter.repositories.ParticipantRepository;
 import com.davr7.journey_jotter.services.exceptions.ParticipantNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,10 @@ public class ParticipantService {
     public void registerParticipantsToEvent(List<String> emailList, Trip trip) {
         List<Participant> participants = emailList.stream().map(email -> new Participant(email, trip)).toList();
         participantRepo.saveAll(participants);
+    }
+
+    public List<ParticipantEventDto> findAllParticipantsFromEvent(UUID tripId){
+        return participantRepo.findByTripId(tripId).stream().map(p ->
+                new ParticipantEventDto(p.getId(), p.getName(), p.getEmail(), p.getIsConfirmed())).toList();
     }
 }
