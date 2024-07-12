@@ -32,13 +32,7 @@ public class TripService {
     }
 
     public Trip confirmTrip(UUID id) {
-        Optional<Trip> trip = tripRepo.findById(id);
-
-        if (trip.isEmpty()) {
-            throw new TripNotFoundException();
-        }
-
-        Trip rawTrip = trip.get();
+        Trip rawTrip = findTripById(id);
         rawTrip.setIsConfirmed(true);
         return tripRepo.save(rawTrip);
     }
