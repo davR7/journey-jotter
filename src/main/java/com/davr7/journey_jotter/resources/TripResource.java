@@ -3,6 +3,7 @@ package com.davr7.journey_jotter.resources;
 import com.davr7.journey_jotter.domain.Activity;
 import com.davr7.journey_jotter.domain.Trip;
 import com.davr7.journey_jotter.dtos.ActivityCreateDto;
+import com.davr7.journey_jotter.dtos.ActivityResponseDto;
 import com.davr7.journey_jotter.dtos.ParticipantEventDto;
 import com.davr7.journey_jotter.dtos.TripCreateDto;
 import com.davr7.journey_jotter.services.ActivityService;
@@ -65,5 +66,11 @@ public class TripResource {
     public ResponseEntity<Activity> handleCreateActivityToEvent(@PathVariable UUID id, @RequestBody ActivityCreateDto data){
         Activity activity = activityServ.createActivityToEvent(id, data);
         return ResponseEntity.ok().body(activity);
+    }
+
+    @GetMapping(value = "/{id}/activities")
+    public ResponseEntity<List<ActivityResponseDto>> handleFindActivitiesToEvent(@PathVariable UUID id){
+        List<ActivityResponseDto> activities = activityServ.findActivitiesToEvent(id);
+        return ResponseEntity.ok().body(activities);
     }
 }
