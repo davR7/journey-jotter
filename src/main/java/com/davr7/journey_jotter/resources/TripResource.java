@@ -1,12 +1,11 @@
 package com.davr7.journey_jotter.resources;
 
 import com.davr7.journey_jotter.domain.Activity;
+import com.davr7.journey_jotter.domain.Note;
 import com.davr7.journey_jotter.domain.Trip;
-import com.davr7.journey_jotter.dtos.ActivityCreateDto;
-import com.davr7.journey_jotter.dtos.ActivityResponseDto;
-import com.davr7.journey_jotter.dtos.ParticipantEventDto;
-import com.davr7.journey_jotter.dtos.TripCreateDto;
+import com.davr7.journey_jotter.dtos.*;
 import com.davr7.journey_jotter.services.ActivityService;
+import com.davr7.journey_jotter.services.NoteService;
 import com.davr7.journey_jotter.services.ParticipantService;
 import com.davr7.journey_jotter.services.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,9 @@ public class TripResource {
 
     @Autowired
     ActivityService activityServ;
+
+    @Autowired
+    NoteService noteServ;
 
     @PostMapping
     public ResponseEntity<Trip> handleCreateTrip(@RequestBody TripCreateDto data){
@@ -72,5 +74,11 @@ public class TripResource {
     public ResponseEntity<List<ActivityResponseDto>> handleFindActivitiesToEvent(@PathVariable UUID id){
         List<ActivityResponseDto> activities = activityServ.findActivitiesToEvent(id);
         return ResponseEntity.ok().body(activities);
+    }
+
+    @PostMapping(value = "/{id}/note")
+    public ResponseEntity<Note> handleCreateNoteToEvent(@PathVariable UUID id, @RequestBody NoteCreateDto data){
+        Note note = noteServ.createNoteToEvent(id, data);
+        return ResponseEntity.ok().body(note);
     }
 }
