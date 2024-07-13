@@ -36,4 +36,8 @@ public class TripService {
         rawTrip.setIsConfirmed(true);
         return tripRepo.save(rawTrip);
     }
+
+    public Boolean checkIfTripExists(UUID id){
+        return tripRepo.existsById(id);
+    }
 }
