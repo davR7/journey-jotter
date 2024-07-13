@@ -81,4 +81,10 @@ public class TripResource {
         Note note = noteServ.createNoteToEvent(id, data);
         return ResponseEntity.ok().body(note);
     }
+
+    @GetMapping(value = "/{id}/notes")
+    public ResponseEntity<List<NoteResponseDto>> handleFindNotesToEvent(@PathVariable UUID id){
+        List<NoteResponseDto> notes = noteServ.findNotesToEvent(id);
+        return ResponseEntity.ok().body(notes);
+    }
 }
