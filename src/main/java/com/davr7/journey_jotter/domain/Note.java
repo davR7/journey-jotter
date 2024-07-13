@@ -1,5 +1,6 @@
 package com.davr7.journey_jotter.domain;
 
+import com.davr7.journey_jotter.dtos.NoteCreateDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,4 +32,11 @@ public class Note {
     @ManyToOne
     @JoinColumn(name="trip_id", nullable = false)
     private Trip trip;
+
+    public Note(NoteCreateDto data, Trip trip){
+        this.title = data.title();
+        this.description = data.description();
+        this.url = data.url();
+        this.trip = trip;
+    }
 }
