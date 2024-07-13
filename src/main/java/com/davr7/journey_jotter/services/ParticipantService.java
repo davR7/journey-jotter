@@ -31,12 +31,12 @@ public class ParticipantService {
         return participantRepo.save(rawParticipant);
     }
 
-    public void registerParticipantsToEvent(List<String> emailList, Trip trip) {
+    public void registerParticipantsToTrip(List<String> emailList, Trip trip) {
         List<Participant> participants = emailList.stream().map(email -> new Participant(email, trip)).toList();
         participantRepo.saveAll(participants);
     }
 
-    public List<ParticipantEventDto> findAllParticipantsFromEvent(UUID tripId){
+    public List<ParticipantEventDto> findAllParticipantsFromTrip(UUID tripId){
         return participantRepo.findByTripId(tripId).stream().map(p ->
                 new ParticipantEventDto(p.getId(), p.getName(), p.getEmail(), p.getIsConfirmed())).toList();
     }

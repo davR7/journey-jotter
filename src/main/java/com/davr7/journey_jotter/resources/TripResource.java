@@ -35,7 +35,7 @@ public class TripResource {
     @PostMapping
     public ResponseEntity<Trip> handleCreateTrip(@RequestBody TripCreateDto data){
         Trip newTrip = tripServ.createTrip(data);
-        participantServ.registerParticipantsToEvent(data.emailsToInvite(), newTrip);
+        participantServ.registerParticipantsToTrip(data.emailsToInvite(), newTrip);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -59,32 +59,32 @@ public class TripResource {
     }
 
     @GetMapping(value = "/{id}/participants")
-    public ResponseEntity<List<ParticipantEventDto>> handleFindAllParticipantsFromEvent(@PathVariable UUID id){
-        List<ParticipantEventDto> participants =  participantServ.findAllParticipantsFromEvent(id);
+    public ResponseEntity<List<ParticipantEventDto>> handleFindAllParticipantsFromTrip(@PathVariable UUID id){
+        List<ParticipantEventDto> participants =  participantServ.findAllParticipantsFromTrip(id);
         return ResponseEntity.ok().body(participants);
     }
 
     @PostMapping(value = "/{id}/activity")
     public ResponseEntity<Activity> handleCreateActivityToEvent(@PathVariable UUID id, @RequestBody ActivityCreateDto data){
-        Activity activity = activityServ.createActivityToEvent(id, data);
+        Activity activity = activityServ.createActivityToTrip(id, data);
         return ResponseEntity.ok().body(activity);
     }
 
     @GetMapping(value = "/{id}/activities")
     public ResponseEntity<List<ActivityResponseDto>> handleFindActivitiesToEvent(@PathVariable UUID id){
-        List<ActivityResponseDto> activities = activityServ.findActivitiesToEvent(id);
+        List<ActivityResponseDto> activities = activityServ.findActivitiesFromTrip(id);
         return ResponseEntity.ok().body(activities);
     }
 
     @PostMapping(value = "/{id}/note")
     public ResponseEntity<Note> handleCreateNoteToEvent(@PathVariable UUID id, @RequestBody NoteCreateDto data){
-        Note note = noteServ.createNoteToEvent(id, data);
+        Note note = noteServ.createNoteToTrip(id, data);
         return ResponseEntity.ok().body(note);
     }
 
     @GetMapping(value = "/{id}/notes")
     public ResponseEntity<List<NoteResponseDto>> handleFindNotesToEvent(@PathVariable UUID id){
-        List<NoteResponseDto> notes = noteServ.findNotesToEvent(id);
+        List<NoteResponseDto> notes = noteServ.findNotesFromTrip(id);
         return ResponseEntity.ok().body(notes);
     }
 }

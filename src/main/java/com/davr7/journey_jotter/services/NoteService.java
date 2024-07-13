@@ -19,13 +19,13 @@ public class NoteService {
     @Autowired
     TripService tripServ;
 
-    public Note createNoteToEvent(UUID tripId, NoteCreateDto data){
+    public Note createNoteToTrip(UUID tripId, NoteCreateDto data){
         Trip trip = tripServ.findTripById(tripId);
         Note note = new Note(data, trip);
         return noteRepo.save(note);
     }
 
-    public List<NoteResponseDto> findNotesToEvent(UUID tripId){
+    public List<NoteResponseDto> findNotesFromTrip(UUID tripId){
         return noteRepo.findByTripId(tripId).stream().map(n ->
                 new NoteResponseDto(n.getId(), n.getTitle(), n.getDescription(), n.getUrl())).toList();
     }

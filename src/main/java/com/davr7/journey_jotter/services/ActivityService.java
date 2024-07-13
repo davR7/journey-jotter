@@ -22,7 +22,7 @@ public class ActivityService {
     @Autowired
     TripService tripServ;
 
-    public Activity createActivityToEvent(UUID id, ActivityCreateDto data) {
+    public Activity createActivityToTrip(UUID id, ActivityCreateDto data) {
         Trip trip = tripServ.findTripById(id);
 
         Activity newActivity = new Activity();
@@ -32,7 +32,7 @@ public class ActivityService {
         return activityRepo.save(newActivity);
     }
 
-    public List<ActivityResponseDto> findActivitiesToEvent(UUID tripId) {
+    public List<ActivityResponseDto> findActivitiesFromTrip(UUID tripId) {
         return activityRepo.findByTripId(tripId).stream().map(a ->
                 new ActivityResponseDto(a.getId(), a.getTitle(), a.getOccursAt())).toList();
     }
