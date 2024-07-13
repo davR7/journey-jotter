@@ -15,6 +15,12 @@ public class ParticipantResource {
     @Autowired
     ParticipantService participantServ;
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Participant> handleFindParticipantById(@PathVariable UUID id){
+        Participant participant = participantServ.findParticipantById(id);
+        return ResponseEntity.ok().body(participant);
+    }
+
     @GetMapping(value = "/{id}/confirm")
     public ResponseEntity<Participant> handleConfirmParticipant(@PathVariable UUID id, @RequestBody ParticipantConfirmDto data){
         Participant participant = participantServ.confirmParticipant(id, data);
