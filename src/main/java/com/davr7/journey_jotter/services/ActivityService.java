@@ -33,6 +33,10 @@ public class ActivityService {
     }
 
     public List<ActivityResponseDto> findActivitiesFromTrip(UUID tripId) {
+        if (!tripServ.checkIfTripExists(tripId)){
+            throw new TripNotFoundException();
+        }
+
         return activityRepo.findByTripId(tripId).stream().map(a ->
                 new ActivityResponseDto(a.getId(), a.getTitle(), a.getOccursAt())).toList();
     }

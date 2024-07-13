@@ -5,6 +5,7 @@ import com.davr7.journey_jotter.domain.Trip;
 import com.davr7.journey_jotter.dtos.NoteCreateDto;
 import com.davr7.journey_jotter.dtos.NoteResponseDto;
 import com.davr7.journey_jotter.repositories.NoteRepository;
+import com.davr7.journey_jotter.services.exceptions.TripNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,10 @@ public class NoteService {
     }
 
     public List<NoteResponseDto> findNotesFromTrip(UUID tripId){
+        if (!tripServ.checkIfTripExists(tripId)){
+            throw new TripNotFoundException();
+        }
+
         return noteRepo.findByTripId(tripId).stream().map(n ->
                 new NoteResponseDto(n.getId(), n.getTitle(), n.getDescription(), n.getUrl())).toList();
     }
