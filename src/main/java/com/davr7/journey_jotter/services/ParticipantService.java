@@ -22,14 +22,13 @@ public class ParticipantService {
     @Autowired
     TripService tripServ;
 
-    public Participant confirmParticipant(UUID id, ParticipantConfirmDto data) {
+    public Participant findParticipantById(UUID id) {
         Optional<Participant> participant = participantRepo.findById(id);
+        return participant.orElseThrow(ParticipantNotFoundException::new);
+    }
 
-        if (participant.isEmpty()) {
-            throw new ParticipantNotFoundException();
-        }
-
-        Participant rawParticipant = participant.get();
+    public Participant confirmParticipant(UUID id, ParticipantConfirmDto data) {
+        Participant rawParticipant = findParticipantById(id);
         rawParticipant.setName(data.name());
         rawParticipant.setIsConfirmed(true);
         return participantRepo.save(rawParticipant);
