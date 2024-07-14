@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -16,6 +16,6 @@ public class GlobalExceptionHandler {
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public ErrorResponse handleResourceNotFoundException(Exception ex, HttpServletRequest req) {
         String error = "Not Found";
-        return new ErrorResponse(Instant.now(), req.getRequestURI(), HttpStatus.NOT_FOUND.value(), error, ex.getMessage());
+        return new ErrorResponse(LocalDateTime.now(), req.getRequestURI(), HttpStatus.NOT_FOUND.value(), error, ex.getMessage());
     }
 }

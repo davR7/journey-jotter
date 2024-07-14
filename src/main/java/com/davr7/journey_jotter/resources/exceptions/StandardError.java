@@ -4,13 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 public class StandardError {
-    protected Instant timestamp;
+    protected LocalDateTime timestamp;
     protected String path;
     protected Integer status;
     protected String error;
