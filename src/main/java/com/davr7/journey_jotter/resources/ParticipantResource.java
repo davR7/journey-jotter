@@ -21,7 +21,7 @@ public class ParticipantResource {
         return ResponseEntity.ok().body(participant);
     }
 
-    @GetMapping(value = "/{id}/confirm")
+    @PatchMapping(value = "/{id}/confirm")
     public ResponseEntity<Participant> handleConfirmParticipant(@PathVariable UUID id, @RequestBody ParticipantConfirmDto data){
         Participant participant = participantServ.confirmParticipant(id, data);
         return ResponseEntity.ok().body(participant);

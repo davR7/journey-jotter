@@ -52,7 +52,7 @@ public class TripResource {
         return ResponseEntity.ok().body(trip);
     }
 
-    @GetMapping(value = "/{id}/confirm")
+    @PatchMapping(value = "/{id}/confirm")
     public ResponseEntity<Trip> handleConfirmTrip(@PathVariable UUID id){
         Trip trip = tripServ.confirmTrip(id);
         return ResponseEntity.ok().body(trip);
