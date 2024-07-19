@@ -15,9 +15,9 @@ No projeto é utilizado princípios da Clean Architecture para garantir um códi
 ```markdown
 GET /trip/{id} - Recupera uma viagem especifica.
 
-GET /trip/{id}/confirm - Confirma uma viagem especifica.
+PATCH /trip/{id}/confirm - Confirma uma viagem especifica.
 
-GET /trip/{id}/participants - Recupera uma lista de todos participantes de viagem especifica.
+GET /trip/{id}/participants - Recupera uma lista de todos participantes de uma viagem especifica.
 
 POST /trip/{id}/activity - Cria uma atividade para uma viagem especifica.
 
@@ -33,7 +33,7 @@ GET /trip/{id}/notes - Recupera uma lista de todas notas de uma viagem especific
 ```markdown
 GET /participant/{id} - Recupera um participante especifico.
 
-GET /participant/{id}/confirm - Confirma uma participante especifico.
+PATCH /participant/{id}/confirm - Confirma uma participante especifico.
 ```
 
 ## Exemplo de Corpo da requisição
@@ -76,9 +76,9 @@ GET /participant/{id}/confirm - Confirma uma participante especifico.
 
 ## Dependecias Utilizadas:
 
-- spring-boot-data-jpa
+- data-jpa
 - spring-boot-web
 - h2
-- flyway Migration
+- flyway migration
 - lombok
 - devtools
