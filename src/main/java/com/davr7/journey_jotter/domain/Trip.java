@@ -35,9 +35,11 @@ public class Trip {
     @Column(name = "is_confirmed", nullable = false)
     private Boolean isConfirmed;
 
-    @Column(name = "owner_name", nullable = false)
-    private String ownerName;
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable = false)
+    private User user;
 
-    @Column(name = "owner_email", nullable = false)
-    private String ownerEmail;
+    public Trip(UUID id) {
+        this.id = id;
+    }
 }
