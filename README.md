@@ -10,33 +10,52 @@ No projeto é utilizado princípios da Clean Architecture para garantir um códi
 
 ## Principais endpoints
 
-### Trip
+### users
 
 ```markdown
-GET /trip/{id} - Recupera uma viagem especifica.
+POST /users - Cria uma usuário.
 
-PATCH /trip/{id}/confirm - Confirma uma viagem especifica.
+GET /users/{id} - Recupera um usuário especifico.
 
-GET /trip/{id}/participants - Recupera uma lista de todos participantes de uma viagem especifica.
+POST /users/{userId}/trips - Cria uma viagem para um usuário especifico.
 
-POST /trip/{id}/activity - Cria uma atividade para uma viagem especifica.
-
-GET /trip/{id}/activities - Recupera uma lista de todas atividades de uma viagem especifica.
-
-POST /trip/{id}/note - Cria uma nota para uma viagem especifica.
-
-GET /trip/{id}/notes - Recupera uma lista de todas notas de uma viagem especifica.
+PATCH /users/{userId}/trips/{tripId}/confirm - Confirma uma viagem especifica.
 ```
 
-### Participant
+### trips
 
 ```markdown
-GET /participant/{id} - Recupera um participante especifico.
+GET /trips/{id} - Recupera uma viagem especifica.
 
-PATCH /participant/{id}/confirm - Confirma uma participante especifico.
+GET /trips/{id}/participants - Recupera uma lista de todos participantes de uma viagem especifica.
+
+POST /trips/{id}/activities - Cria uma atividade para uma viagem especifica.
+
+GET /trips/{id}/activities - Recupera uma lista de todas atividades de uma viagem especifica.
+
+POST /trips/{id}/notes - Cria uma nota para uma viagem especifica.
+
+GET /trips/{id}/notes - Recupera uma lista de todas notas de uma viagem especifica.
 ```
 
-## Exemplo de Corpo da requisição
+### participants
+
+```markdown
+GET /participants/{id} - Recupera um participante especifico.
+
+PATCH /participants/{id}/confirm - Confirma uma participante especifico.
+```
+
+## Exemplo de corpo da requisição
+
+### Criar usuário
+
+```json
+{
+  "name": "Davidson Melo",
+  "email": "dav@gmail.com"
+}
+```
 
 ### Criar viagem
 
@@ -49,9 +68,7 @@ PATCH /participant/{id}/confirm - Confirma uma participante especifico.
   "emailsToInvite": [
     "fernanda.kipper@rocketseat.com",
     "mayk.brito@rocketseat.com"
-  ],
-  "ownerName": "Davidson Melo",
-  "ownerEmail": "dav@gmail.com"
+  ]
 }
 ```
 
@@ -68,9 +85,9 @@ PATCH /participant/{id}/confirm - Confirma uma participante especifico.
 
 ```json
 {
-  "title": "regras da casa",
+  "title": "regras da piscina",
   "description": "Não deixe de ler o pdf, tem informações importantes",
-  "url": "https://www.regrasdacasa.com.br/info.pdf"
+  "url": "https://www.regrasdacasa.com.br/piscina.pdf"
 }
 ```
 
