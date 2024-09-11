@@ -1,7 +1,12 @@
 package com.davr7.journey_jotter.dtos;
 
-import java.time.LocalDateTime;
+import com.davr7.journey_jotter.domain.Note;
+import com.davr7.journey_jotter.domain.User;
+
 import java.util.UUID;
 
-public record NoteResponseDto(UUID id, String title, String description, String url) {
+public record DataNoteDto(UUID id) {
+    public static DataNoteDto convert(Note note){
+        return new DataNoteDto(note.getId());
+    }
 }
