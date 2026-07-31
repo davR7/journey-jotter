@@ -4,9 +4,16 @@
 
 # JourneyJotter
 
-JourneyJotter foi criado com base no evento NLW Journey da Rocketseat. A API tem como objetivo ajudar o usuário a organizar viagens com amigos ou família. É possível adicionar atividades que ocorrerão durante os dias da viagem e notas importantes para as pessoas que estão participando.
+A **JourneyJotter API** é uma API REST para planejamento de viagens em grupo, desenvolvida durante o evento **NLW Journey**, promovido pela **Rocketseat**. Ela permite gerenciar participantes, organizar atividades da viagem e compartilhar informações importantes entre todos os envolvidos.
 
-No projeto é utilizado princípios da Clean Architecture para garantir um código mais modular, testável e fácil de manter
+## Tecnologias
+
+- data-jpa
+- spring-boot-web
+- h2
+- flyway migration
+- lombok
+- devtools
 
 ## Principais endpoints
 
@@ -90,12 +97,3 @@ PATCH /participants/{id}/confirm - Confirma uma participante especifico.
   "url": "https://www.regrasdacasa.com.br/piscina.pdf"
 }
 ```
-
-## Dependecias Utilizadas:
-
-- data-jpa
-- spring-boot-web
-- h2
-- flyway migration
-- lombok
-- devtools
